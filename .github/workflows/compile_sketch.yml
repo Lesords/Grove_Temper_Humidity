@@ -16,11 +16,18 @@ jobs:
 
       - name: Setup arduino cli
         uses: arduino/setup-arduino-cli@v2.0.0
+        with:
+          version: "1.1.0"
 
       - name: Install repo as library
         run: |
           mkdir -p "$HOME/Arduino/libraries"
           ln -s "$PWD" "$HOME/Arduino/libraries/."
+          ls -al "$HOME/Arduino/libraries/."
+          arduino-cli version
+          pwd
+          ls -al /home/runner/work/Grove_Temper_Humidity/Grove_Temper_Humidity
+          ls -al /home/runner/Arduino/libraries/Grove_Temper_Humidity/
 
       - name: Install Arduino core
         run: |
@@ -28,4 +35,4 @@ jobs:
           arduino-cli core install arduino:avr@1.8.2
 
       - name: Build sketch
-        run: arduino-cli compile --fqbn arduino:avr:uno ./examples/TH02_demo/TH02_demo.ino --warnings more
+        run: arduino-cli compile --fqbn arduino:avr:uno --libraries /home/runner/work/Grove_Temper_Humidity/Grove_Temper_Humidity ./examples/TH02_demo/ --warnings more

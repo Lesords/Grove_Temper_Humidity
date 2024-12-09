@@ -1,0 +1,31 @@
+name: Compile Sketch
+
+# The workflow will run on every push and pull request to the repository
+on:
+  - push
+  - pull_request
+
+jobs:
+  compile-sketch:
+    runs-on: ubuntu-latest
+
+    steps:
+      # This step makes the contents of the repository available to the workflow
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup arduino cli
+        uses: arduino/setup-arduino-cli@v2.0.0
+
+      - name: Install repo as library
+        run: |
+          mkdir -p "$HOME/Arduino/libraries"
+          ln -s "$PWD" "$HOME/Arduino/libraries/."
+
+      - name: Install Arduino core
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr@1.8.2
+
+      - name: Build sketch
+        run: arduino-cli compile --fqbn arduino:avr:uno ./examples/TH02_demo/TH02_demo.ino --warnings more

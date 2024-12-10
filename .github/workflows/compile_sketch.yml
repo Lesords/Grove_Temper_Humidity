@@ -14,8 +14,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Checkout script repository
+        uses: actions/checkout@v4
+        with:
+            repository: Lesords/actions
+            path: ci
+
       - name: Setup arduino cli
         uses: arduino/setup-arduino-cli@v2.0.0
 
       - name: Build sketch
-        run: ./tools/compile.sh
+        run: ./ci/tools/compile.sh

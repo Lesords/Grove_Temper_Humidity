@@ -17,22 +17,5 @@ jobs:
       - name: Setup arduino cli
         uses: arduino/setup-arduino-cli@v2.0.0
 
-      - name: debug
-        run: |
-            arduino-cli lib list
-            pwd
-            ls -al
-            cat ./src/TH02_dev.h
-
-      - name: Install repo as library
-        run: |
-          mkdir -p "$HOME/Arduino/libraries"
-          ln -s "$PWD" "$HOME/Arduino/libraries/."
-
-      - name: Install Arduino core
-        run: |
-          arduino-cli core update-index
-          arduino-cli core install arduino:avr@1.8.2
-
       - name: Build sketch
-        run: arduino-cli compile --fqbn arduino:avr:uno ./examples/TH02_demo/ --warnings more
+        run: ./tools/compile.sh

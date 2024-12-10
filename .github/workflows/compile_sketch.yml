@@ -17,6 +17,13 @@ jobs:
       - name: Setup arduino cli
         uses: arduino/setup-arduino-cli@v2.0.0
 
+      - name: debug
+        run: |
+            arduino-cli lib list
+            pwd
+            ls -al
+            cat ./src/TH02_dev.h
+
       - name: Install repo as library
         run: |
           mkdir -p "$HOME/Arduino/libraries"

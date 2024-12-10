@@ -23,11 +23,6 @@ jobs:
         run: |
           mkdir -p "$HOME/Arduino/libraries"
           ln -s "$PWD" "$HOME/Arduino/libraries/."
-          ls -al "$HOME/Arduino/libraries/."
-          arduino-cli version
-          pwd
-          ls -al /home/runner/work/Grove_Temper_Humidity/Grove_Temper_Humidity
-          ls -al /home/runner/Arduino/libraries/Grove_Temper_Humidity/
 
       - name: Install Arduino core
         run: |

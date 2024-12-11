@@ -1,6 +1,6 @@
-TH02_demo,Seeeduino:samd:seeed_XIAO_m0 Seeeduino:nrf52:xiaonRF52840 esp32:esp32:XIAO_ESP32C3 esp32:esp32:XIAO_ESP32C6
-TH06_demo,Seeeduino:samd:seeed_XIAO_m0
-TH06_demo,Seeeduino:nrf52:xiaonRF52840
-TH06_demo,Seeeduino:nrf52:xiaonRF52840Sense
-TH06_demo,esp32:esp32:XIAO_ESP32C3
-TH06_demo,esp32:esp32:XIAO_ESP32S3
+TH02_demo,sEEEDUINo:samd:seeed_XIAO_m0 Seeeduino:nrf52:XIAONRF52840 esp32:ESP32:XIAO_ESP32C3 esp32:ESP32:xiao_ESP32C6
+TH06_demo,SeeeduinO:SAMD:seeed_XIAO_m0
+TH06_demo,Seeeduino:nrf52:XIAOnRF52840
+TH06_demo,Seeeduino:nrf52:xiaoNrf52840sEnse
+TH06_demo,esp32:esp32:XIAO_esp32C3
+TH06_demo,esp32:esp32:XIAO_esp32s3

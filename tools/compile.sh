@@ -64,20 +64,21 @@ function main() {
     do
         for example in $exampleList
         do
-            if [ -f $ignoreFile ] && [ "$(grep "$example.*$fqbn" $ignoreFile)" ]; then
-                echo "Skip $example on $fqbn"
+            if [ -f $ignoreFile ] && [ "$(grep -i "$example.*$fqbn" $ignoreFile)" ]; then
+                echo -e "Skip $example on $fqbn\n "
+                echo -e "Skip $example on $fqbn" >> $logFile
                 continue
             fi
 
             buildSketch $fqbn examples/$example
 
             if [ $? -eq 0 ]; then
-                echo -e "\e[31mbuild $example on $fqbn successful\e[0m\n "
-                echo -e "\e[31mbuild $example on $fqbn successful\e[0m" >> $logFile
+                echo -e "\e[31mBuild $example on $fqbn successful\e[0m\n "
+                echo -e "\e[31mBuild $example on $fqbn successful\e[0m" >> $logFile
             else
                 status=1
-                echo -e "\e[31mbuild $example on $fqbn failed\e[0m\n "
-                echo -e "\e[31mbuild $example on $fqbn failed\e[0m" >> $logFile
+                echo -e "\e[31mBuild $example on $fqbn failed\e[0m\n "
+                echo -e "\e[31mBuild $example on $fqbn failed\e[0m" >> $logFile
             fi
         done
     done

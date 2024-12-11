@@ -24,4 +24,4 @@ jobs:
         uses: arduino/setup-arduino-cli@v2.0.0
 
       - name: Build sketch
-        run: ./tools/compile.sh
+        run: ./ci/tools/compile.sh

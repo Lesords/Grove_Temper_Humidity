@@ -1,6 +1,5 @@
-name: Compile Sketch
+name: Compile Examples
 
-# The workflow will run on every push and pull request to the repository
 on:
   - push
   - pull_request
@@ -10,18 +9,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # This step makes the contents of the repository available to the workflow
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Checkout script repository
         uses: actions/checkout@v4
         with:
-            repository: Lesords/actions
+            repository: Seeed-Studio/ci-arduino
             path: ci
 
       - name: Setup arduino cli
         uses: arduino/setup-arduino-cli@v2.0.0
 
+      - name: Create a ignore.list file
+        run: |
+          # eg: echo "<path>,<fqbn>" >> ignore.list
+
       - name: Build sketch
-        run: ./tools/compile.sh
+        run: ./ci/tools/compile.sh

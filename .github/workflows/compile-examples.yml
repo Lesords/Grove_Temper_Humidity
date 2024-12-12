@@ -1,16 +1,14 @@
-name: Compile Sketch
+name: Compile Examples
 
-# The workflow will run on every push and pull request to the repository
 on:
   - push
   - pull_request
 
 jobs:
-  compile-sketch:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      # This step makes the contents of the repository available to the workflow
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -25,9 +23,18 @@ jobs:
 
       - name: Create a ignore.list file
         run: |
+          # eg: echo "<path>,<fqbn>" >> ignore.list
           echo "TH02_demo,Seeeduino:nrf52:XIAONRF52840 esp32:ESP32:XIAO_ESP32C3" >> ignore.list
           echo "TH06_demo,Seeeduino:nrf52:XIAOnRF52840" >> ignore.list
           echo "TH06_demo,esp32:esp32:XIAO_esp32C3" >> ignore.list
 
       - name: Build sketch
         run: ./ci/tools/compile.sh
+
+      - name: Build result
+        run: cat build.log
+
+      - name: Generate issue
+        run: ./ci/tools/issue.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

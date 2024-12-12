@@ -3,6 +3,7 @@
 status=0
 ignoreFile=ignore.list
 logFile=build.log
+resultFile=compile.failed
 fqbnList=(
     "Seeeduino:samd:seeed_XIAO_m0"
     "Seeeduino:nrf52:xiaonRF52840"
@@ -60,6 +61,7 @@ function init() {
 function main() {
     init
 
+    echo -e "\e[33mCompilation results\e[0m" >> $logFile
     for fqbn in ${fqbnList[*]}
     do
         for example in $exampleList
@@ -83,8 +85,7 @@ function main() {
         done
     done
 
-    echo -e "\e[33mCompilation results\e[0m" && cat $logFile
-    exit $status
+    [ "$status" -eq 1 ] && echo $status >> $resultFile
 }
 
 main

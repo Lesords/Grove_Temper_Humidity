@@ -1,0 +1,38 @@
+name: Compile Examples
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      status:
+        description: 'Status'
+        required: true
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout script repository
+        uses: actions/checkout@v4
+        with:
+            repository: Lesords/actions
+            path: ci
+
+      - name: Setup arduino cli
+        uses: arduino/setup-arduino-cli@v2.0.0
+
+      - name: Create a ignore.list file
+        run: |
+          # eg: echo "<path>,<fqbn>" >> ignore.list
+          echo "TH02_demo,Seeeduino:nrf52:XIAONRF52840 esp32:ESP32:XIAO_ESP32C3" >> ignore.list
+          echo "TH06_demo,Seeeduino:nrf52:XIAOnRF52840" >> ignore.list
+          echo "TH06_demo,esp32:esp32:XIAO_esp32C3" >> ignore.list
+
+      - name: Build sketch
+        run: ./ci/tools/compile.sh

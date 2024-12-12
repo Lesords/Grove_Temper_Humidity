@@ -1,0 +1,17 @@
+name: Trigger Example
+
+on:
+  workflow_dispatch:
+    inputs:
+      status:
+        description: 'Status'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: debug
+        run: |
+          echo "hello world"

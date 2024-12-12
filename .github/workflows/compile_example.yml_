@@ -3,12 +3,6 @@ name: Compile Examples
 on:
   push:
   pull_request:
-  workflow_dispatch:
-    inputs:
-      status:
-        description: 'Status'
-        required: true
-        type: boolean
 
 jobs:
   build:

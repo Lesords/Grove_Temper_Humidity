@@ -34,7 +34,11 @@ jobs:
         run: ./ci/tools/compile.sh
 
       - name: Build result
-        run: cat build.log
+        run: |
+            cat build.log
+            if [ ${{ github.event_name }} == 'pull_request' ] && [ -f compile.failed ]; then
+                exit 1
+            fi
 
       - name: Generate issue
         if: ${{ github.event_name != 'pull_request' }}

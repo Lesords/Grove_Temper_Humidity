@@ -21,6 +21,12 @@ jobs:
       - name: Setup arduino cli
         uses: arduino/setup-arduino-cli@v2.0.0
 
+      - name: Create a depend.list file
+        run: |
+          # eg: echo "<repo>" >> depend.list
+          echo "Seeed-Studio/Seeed_Arduino_ADXL345" >> depend.list
+          echo "Seeed-Studio/Grove_Current_Sensor" >> depend.list
+
       - name: Create a ignore.list file
         run: |
           # eg: echo "<path>,<fqbn>" >> ignore.list
@@ -29,10 +35,14 @@ jobs:
           echo "TH06_demo,esp32:esp32:XIAO_esp32C3" >> ignore.list
 
       - name: Build sketch
-        run: ./ci/tools/compile.sh
+        run: ./tools/compile.sh
 
       - name: Build result
         run: cat build.log
+
+      - name: debug
+        run: |
+          ls -al $HOME/Arduino/libraries/
 
       - name: Generate issue
         run: ./ci/tools/issue.sh
